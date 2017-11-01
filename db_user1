@@ -1,0 +1,381 @@
+-- MySQL dump 10.13  Distrib 5.1.66, for portbld-freebsd9.1 (i386)
+--
+-- Host: localhost    Database: user1
+-- ------------------------------------------------------
+-- Server version	5.1.66
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `MY_TEST`
+--
+
+DROP TABLE IF EXISTS `MY_TEST`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MY_TEST` (
+  `key` varchar(150) DEFAULT NULL,
+  `data` varchar(150) DEFAULT NULL,
+  UNIQUE KEY `key_index` (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MY_TEST`
+--
+
+LOCK TABLES `MY_TEST` WRITE;
+/*!40000 ALTER TABLE `MY_TEST` DISABLE KEYS */;
+INSERT INTO `MY_TEST` VALUES ('user7','Input Data'),('user12','data12'),('user8','one one'),('user','John Doe'),('user_01','new_text'),('User01','newText');
+/*!40000 ALTER TABLE `MY_TEST` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booker_events`
+--
+
+DROP TABLE IF EXISTS `booker_events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booker_events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `time_start` int(11) NOT NULL,
+  `time_end` int(11) NOT NULL,
+  `parent` int(11) NOT NULL DEFAULT '0',
+  `time_create` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `booker_events_fk0` (`user_id`),
+  KEY `booker_events_fk1` (`room_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booker_events`
+--
+
+LOCK TABLES `booker_events` WRITE;
+/*!40000 ALTER TABLE `booker_events` DISABLE KEYS */;
+INSERT INTO `booker_events` VALUES (1,1,1,'conference',1509470901,1507158000,0,1509470001),(2,2,2,'conference2',1507244400,1507251600,0,1509471001),(3,1,1,'conference',1507255200,1507266000,0,1507254200);
+/*!40000 ALTER TABLE `booker_events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booker_roles`
+--
+
+DROP TABLE IF EXISTS `booker_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booker_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booker_roles`
+--
+
+LOCK TABLES `booker_roles` WRITE;
+/*!40000 ALTER TABLE `booker_roles` DISABLE KEYS */;
+INSERT INTO `booker_roles` VALUES (1,'admin'),(2,'user');
+/*!40000 ALTER TABLE `booker_roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booker_rooms`
+--
+
+DROP TABLE IF EXISTS `booker_rooms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booker_rooms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booker_rooms`
+--
+
+LOCK TABLES `booker_rooms` WRITE;
+/*!40000 ALTER TABLE `booker_rooms` DISABLE KEYS */;
+INSERT INTO `booker_rooms` VALUES (1,'Boardroom 1'),(2,'Boardroom 2'),(3,'Boardroom 3');
+/*!40000 ALTER TABLE `booker_rooms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booker_users`
+--
+
+DROP TABLE IF EXISTS `booker_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booker_users` (
+  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `login` varchar(25) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL DEFAULT '2',
+  `password` varchar(50) NOT NULL,
+  `hash` varchar(100) NOT NULL,
+  `time` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booker_users`
+--
+
+LOCK TABLES `booker_users` WRITE;
+/*!40000 ALTER TABLE `booker_users` DISABLE KEYS */;
+INSERT INTO `booker_users` VALUES (1,'maria','masha@mail.com','2','$2y$10$s9V.TBMoTIRf/P2QFg.5h.eAwvZintfFXvyoQ84gj5I','da933472d9eed90b02ee6e764c51a0fb','1509469137'),(2,'alex','alex@mail.com','2','$2y$10$ZuC9PlmsC/J/4PIvBe/JHOneCHrsVfNaNwxxqmwzsKe','033772ee1cf9fd1d149ff9d84fbc33ab','1509469146'),(3,'111111','alex@mail.com','2','$2y$10$MEbU6C7Gsb6iIcY2GYPJ..T7NLMl2f2VAKgEFj8WbAQ','8656c39dfcf2f4ab72461abf029c566d','1509470535'),(4,'1111111','alex@mail.com','2','$2y$10$gy.MkrMBQY6qRgzqzl7HzOm17CaCI5aaJtl2OAodTU/','2672127c6706f578f3e8079d871bd73f','1509470548'),(5,'11111111','alex@mail.com','2','$2y$10$1edw3NU3GPEUiDizRf3uButIjtleXeITniVm0I8uMQG','37bfc478de70610990ed8878ff764069','1509470608');
+/*!40000 ALTER TABLE `booker_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `journal_articles`
+--
+
+DROP TABLE IF EXISTS `journal_articles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `journal_articles` (
+  `id_article` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `content` text NOT NULL,
+  `date_insert` datetime NOT NULL,
+  PRIMARY KEY (`id_article`),
+  KEY `journal_articles_fk0` (`login`)
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `journal_articles`
+--
+
+LOCK TABLES `journal_articles` WRITE;
+/*!40000 ALTER TABLE `journal_articles` DISABLE KEYS */;
+INSERT INTO `journal_articles` VALUES (3,'cardo','Best story1.4','Best story content1.4','2017-08-31 18:34:48'),(4,'cardo','Best story1.5','Best story content1.5','2017-08-31 18:35:00'),(5,'demezis','Best story1.6','Best story content1.6','2017-08-31 18:35:26'),(6,'demezis','Best story1.7','Best story content1.7','2017-08-31 18:35:37'),(7,'demezis','Best story1.8','Best story content1.8','2017-08-31 18:35:46'),(8,'veritas','Best story1.93132111','Best story content1.9123111','2017-08-31 18:36:03'),(9,'veritas','Best story1.9','Best story content1.9','2017-08-31 18:36:05'),(25,'LarryWall','Accomplishments','Wall is the author of the Usenet client and the widely used patch program. He has won the International Obfuscated C Code Contest twice and was the recipient of the first Free Software Foundation Award for the Advancement of Free Software in 1998','2017-09-05 19:30:30'),(29,'Rosss','sdasda','nooooooooooooooooooo','2017-09-05 19:34:48'),(27,'Alex','Test2','Work app fine!!','2017-09-05 19:32:36'),(19,'LarryWall','Personal life','Wall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976, majoring in chemistry andWall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976, majoring in chemistry andWall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976, majoring in chemistry andWall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976, majoring in chemistry andWall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976, majoring in chemistry and','2017-09-05 16:22:56'),(20,'LarryWall','Personal life','Wall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976Wall grew up in Los Angeles and then Bremerton, Washington, before starting higher education at Seattle Pacific University in 1976','2017-09-05 16:23:02'),(21,'demezis','dasdas','dasdas','2017-09-05 16:25:44'),(22,'demezis','dasdas','dasdas','2017-09-05 16:26:22'),(24,'demezis','sdasd','asdasda','2017-09-05 19:09:37'),(26,'Alex','Hello','World !!!!','2017-09-05 19:31:10');
+/*!40000 ALTER TABLE `journal_articles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `journal_user`
+--
+
+DROP TABLE IF EXISTS `journal_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `journal_user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `f_name` varchar(30) NOT NULL,
+  `l_name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `pass` varchar(100) NOT NULL,
+  `hash` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `journal_user`
+--
+
+LOCK TABLES `journal_user` WRITE;
+/*!40000 ALTER TABLE `journal_user` DISABLE KEYS */;
+INSERT INTO `journal_user` VALUES (1,'veritas','Maria','Orlova','m.orlova@gmail.com','123456','OaMrgfAGbt'),(2,'cardo','Alexandr','Cardo','alexandr.dubiaga@gmail.com','123456','789456'),(3,'demezis','Rostislavsdasd','Reznichenkoadasda','demezis1994@gmail.com','123456','rPyuOAzOXN'),(4,'sdasdasda','','','','',''),(5,'Ros','','','someEmail@mail.ru','235387qq',''),(6,'sdasdasd','','','sdsda@dsadasda','123',''),(7,'LarryWall','Larry','Wall','LarryWall@gmil.com','123456','kTqOhBvHVB'),(8,'Alex','ALEXANDR','Caredok','demezis1994@gmail.com','12345','KoZHUNPutL'),(9,'dasdas','dsdasda','dasdasd','dsadsdasdasdasdasdasd@dsadsdsa','12345',''),(10,'Rosss','Some Text','Text Some','new@email','12345','RuqglBnROX'),(11,'Ray','Ros','Rooos','sdasdas@dsasda','12345',''),(12,'Test','sdasdasda','dasdasdasda','dasda@test','12345','pxyRqSCWxQ');
+/*!40000 ALTER TABLE `journal_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rest_cars`
+--
+
+DROP TABLE IF EXISTS `rest_cars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rest_cars` (
+  `id_car` int(11) NOT NULL AUTO_INCREMENT,
+  `brand` varchar(100) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `year` int(4) NOT NULL,
+  `engine` int(4) NOT NULL,
+  `color` varchar(30) NOT NULL,
+  `speed` int(4) NOT NULL,
+  `price` int(7) NOT NULL,
+  PRIMARY KEY (`id_car`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rest_cars`
+--
+
+LOCK TABLES `rest_cars` WRITE;
+/*!40000 ALTER TABLE `rest_cars` DISABLE KEYS */;
+INSERT INTO `rest_cars` VALUES (1,'Bugatti','BG-6',2009,5702,'red',330,1800000),(2,'Bugatti','BG-7',2010,5801,'yellow',300,1900000),(3,'Bugatti','BG-8',2011,7995,'black',380,2500000),(4,'Rolls-Royce','ZM10',2010,5895,'white',240,1800000),(5,'Rolls-Royce','ZM11',2011,6592,'red',250,170000),(6,'Rolls-Royce','ZM12',2012,6992,'black',280,2300000),(7,'Jaguar','XF',2010,2396,'black',290,900000),(8,'Jaguar','XM',2011,2690,'red',275,130000),(9,'Jaguar','XL',2012,2993,'white',280,1700000),(10,'Chevrolet','CHE-L',2009,2793,'yellow',250,100000);
+/*!40000 ALTER TABLE `rest_cars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rest_orders`
+--
+
+DROP TABLE IF EXISTS `rest_orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rest_orders` (
+  `id_orders` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_car` int(11) NOT NULL,
+  `payment` varchar(50) NOT NULL,
+  `status` varchar(25) NOT NULL DEFAULT 'hold',
+  PRIMARY KEY (`id_orders`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rest_orders`
+--
+
+LOCK TABLES `rest_orders` WRITE;
+/*!40000 ALTER TABLE `rest_orders` DISABLE KEYS */;
+INSERT INTO `rest_orders` VALUES (1,3,3,'card','done'),(2,2,2,'card','hold'),(3,2,2,'card','done'),(4,2,3,'card','done'),(5,2,3,'card','hold'),(6,2,5,'card','hold'),(7,2,4,'cash','hold'),(8,2,3,'cash','hold'),(9,2,4,'card','hold'),(10,2,2,'card','hold'),(11,2,3,'card','hold'),(12,2,3,'card','hold'),(13,2,3,'card','done'),(14,2,3,'cash','hold'),(15,2,3,'cash','hold'),(16,4,6,'card','hold'),(17,4,6,'cash','hold'),(18,2,6,'card','hold'),(19,5,4,'card','delivery'),(20,2,3,'cash','done'),(21,2,4,'card','hold');
+/*!40000 ALTER TABLE `rest_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rest_users`
+--
+
+DROP TABLE IF EXISTS `rest_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rest_users` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(15) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `hash` varchar(60) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rest_users`
+--
+
+LOCK TABLES `rest_users` WRITE;
+/*!40000 ALTER TABLE `rest_users` DISABLE KEYS */;
+INSERT INTO `rest_users` VALUES (1,'veritas','$2y$10$JIomtr9JCsOgjGosf0YYXeydH/yxUMNx.VLYHDF1FbtVxM7FZ8Nbu','00082f3de9febae5bbcc410d0062362a',1507882650),(2,'maria','$2y$10$6I/Xp82oCvHXXpz/8DX/Y.FthCn/eFa4O6RSSu6xXBJGk88vuT.L6','4fee40a4283119d19a2473da1e55abd0',1508341001),(3,'masha','$2y$10$pB0Y5IWTX/hn87RNILV8aumzfbJS2m5JX90wxnJnQddvH2h4zU62W','56e1159bc598c32d6fb7275f1f41a7dc',1507904680),(4,'tannie','$2y$10$vaiybLbXcUaIrBZ/mjrV8eLJFj7STJ7.K1JH6EOqb3hWszQXHusXG','d06c1d58730c2142156433cc94ccc3c7',1507922439),(5,'Maxim','$2y$10$4kwFE57Cqv4VERS0v5y2UOKctUuI2vTSZeF8M/6HDS656gP.0gm2.','88d2726ac50e2da4c19a6a29c9969d98',1508251397),(6,'','$2y$10$7C/XDsUbg88nCoJfeTjUnOK3/a1H3LUXSHEn3yt0MG.B.UlTeBiL6','ebf55572f7e9a136b93371fe10f9b4a2',1508253144),(7,'maxim21','$2y$10$hEd/VlRiTxOrysblqceCzeKocp2017qf1etdaFcRzLKO9ViX8VoDO','a9133cf04d22e3a067a00a29aef3b69f',1508341053);
+/*!40000 ALTER TABLE `rest_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tinyurl_links`
+--
+
+DROP TABLE IF EXISTS `tinyurl_links`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tinyurl_links` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `url` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tinyurl_links`
+--
+
+LOCK TABLES `tinyurl_links` WRITE;
+/*!40000 ALTER TABLE `tinyurl_links` DISABLE KEYS */;
+INSERT INTO `tinyurl_links` VALUES (1,'https://www.google.com.ua','2017-08-23 10:42:33','2017-08-23 10:42:33',0),(2,'https://laravel.com','2017-08-23 10:44:56','2017-08-23 10:44:56',0),(3,'https://unity3d.com/','2017-08-23 10:45:13','2017-08-23 10:45:13',0),(4,'https://unity3d.com/https://unity3d.com/ru/learn','2017-08-23 10:45:24','2017-08-23 10:45:24',0),(5,'https://blog.xojo.com','2017-08-23 11:37:54','2017-08-23 11:37:54',2),(6,'https://dashboard.unityads.unity3d.com/','2017-08-23 11:38:07','2017-08-23 11:38:07',2),(7,'http://onedev.net/post/291','2017-08-23 11:39:48','2017-08-23 11:39:48',3),(8,'http://onedev.net/post/291','2017-08-23 11:46:34','2017-08-23 11:46:34',3),(9,'https://laravel.ru','2017-08-23 14:31:38','2017-08-23 14:31:38',2),(10,'https://laravel.ru','2017-08-23 14:31:43','2017-08-23 14:31:43',2),(11,'https://github.com/','2017-08-23 14:34:11','2017-08-23 14:34:11',2),(12,'http://192.168.0.15/~user1/tinyurl/','2017-08-28 07:54:23','2017-08-28 07:54:23',6);
+/*!40000 ALTER TABLE `tinyurl_links` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tinyurl_migrations`
+--
+
+DROP TABLE IF EXISTS `tinyurl_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tinyurl_migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tinyurl_migrations`
+--
+
+LOCK TABLES `tinyurl_migrations` WRITE;
+/*!40000 ALTER TABLE `tinyurl_migrations` DISABLE KEYS */;
+INSERT INTO `tinyurl_migrations` VALUES ('2017_08_17_134131_create_table_links',1),('2017_08_18_135324_create_table_users',1),('2017_08_22_180534_add_userId_LinksTable',1);
+/*!40000 ALTER TABLE `tinyurl_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tinyurl_users`
+--
+
+DROP TABLE IF EXISTS `tinyurl_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tinyurl_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tinyurl_users`
+--
+
+LOCK TABLES `tinyurl_users` WRITE;
+/*!40000 ALTER TABLE `tinyurl_users` DISABLE KEYS */;
+INSERT INTO `tinyurl_users` VALUES (1,'test@gmail.com','test','$2y$10$xOgP7houIqbxt1l8ke68LuWD5pTnpz2SXKYze0SCVoEu2lkqB8jNi',NULL,'2017-08-23 10:38:09','2017-08-23 10:38:09'),(2,'veritas@gmail.com','veritas','$2y$10$I/H4aaE.VKe.V1H/xVLepuCr0AzOAS0OrELTviuHsyDIc8S/F2MCu','x8NliapXapmkk7E4S6Y29rtu4G9uZeQmvIzHMux1IVQRGMQmxrcWfIPDUhZU','2017-08-23 10:41:20','2017-08-23 14:50:27'),(3,'maria@prnews.io','maria','$2y$10$tCrwEk//alkBI5VndMmrE.qBnMLFt2H4t/kgnZAWMjQ1yJq5eQxja','oBhYEZDQjqHC29CAQqPJdQ61WvAfV5dpURK4vc7ys6C6TcoH4SiiC2K7eO6Z','2017-08-23 11:39:02','2017-08-23 11:46:36'),(4,'name@gmail.com','name','$2y$10$.sQNJx.uZw8gpfT9RptbLufTjm38uWL46DMzJNET92BVQQB4.mJEy',NULL,'2017-08-23 14:40:24','2017-08-23 14:40:24'),(5,'clone@gmail.com','clone','$2y$10$eLDpKhFurbkMnZznXTlplel6GYdt/ZHCKL03EY4uaxHKVLevNyNU2',NULL,'2017-08-23 14:50:03','2017-08-23 14:50:03'),(6,'test@mail.com','Test','$2y$10$xdA8uPgTw8za0.fArqCa.uiFleigGBdqGtXVbipizRaiJhxZXl7H6',NULL,'2017-08-28 07:54:05','2017-08-28 07:54:05');
+/*!40000 ALTER TABLE `tinyurl_users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-10-31 19:46:41
